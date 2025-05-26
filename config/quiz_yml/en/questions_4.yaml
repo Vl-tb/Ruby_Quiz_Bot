@@ -1,0 +1,5 @@
+- question: What is overfitting in machine learning?
+  answers:
+    - When a model fits the training data too well, losing the ability to generalize.
+    - When a model doesn’t learn from data at all.
+    - When a model works only on test data.

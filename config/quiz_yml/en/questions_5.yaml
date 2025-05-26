@@ -1,0 +1,5 @@
+- question: What is reinforcement learning?
+  answers:
+    - A machine learning method where an agent learns by interacting with the environment and receiving rewards or punishments.
+    - A type of deep neural network.
+    - A method of collecting data for training models.

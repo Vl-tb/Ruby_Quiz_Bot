@@ -1,0 +1,76 @@
+---
+en:
+- :question_body: What is machine learning?
+  :question_correct_answer: A method of data analysis that enables computers to learn
+    from experience without explicit programming.
+  :question_answers:
+    A: Manual programming of algorithms for data processing.
+    B: The process of building deep neural networks.
+    C: A method of data analysis that enables computers to learn from experience without
+      explicit programming.
+- :question_body: What is deep learning?
+  :question_correct_answer: A subfield of machine learning that uses multilayer neural
+    networks.
+  :question_answers:
+    A: A subfield of machine learning that uses multilayer neural networks.
+    B: A rule-based programming method.
+    C: A data collection technique for statistical research.
+- :question_body: What are neural networks used for?
+  :question_correct_answer: For pattern recognition, language processing, and decision-making.
+  :question_answers:
+    A: For manual user data input.
+    B: For storing data in databases.
+    C: For pattern recognition, language processing, and decision-making.
+- :question_body: What is overfitting in machine learning?
+  :question_correct_answer: When a model fits the training data too well, losing the
+    ability to generalize.
+  :question_answers:
+    A: When a model doesn’t learn from data at all.
+    B: When a model fits the training data too well, losing the ability to generalize.
+    C: When a model works only on test data.
+- :question_body: What is reinforcement learning?
+  :question_correct_answer: A machine learning method where an agent learns by interacting
+    with the environment and receiving rewards or punishments.
+  :question_answers:
+    A: A type of deep neural network.
+    B: A machine learning method where an agent learns by interacting with the environment
+      and receiving rewards or punishments.
+    C: A method of collecting data for training models.
+ua:
+- :question_body: Що таке машинне навчання?
+  :question_correct_answer: Метод аналізу даних, який дозволяє комп’ютерам навчатися
+    з досвіду без явного програмування.
+  :question_answers:
+    A: Ручне програмування алгоритмів для обробки даних.
+    B: Процес створення глибоких нейронних мереж.
+    C: Метод аналізу даних, який дозволяє комп’ютерам навчатися з досвіду без явного
+      програмування.
+- :question_body: Що таке глибоке навчання?
+  :question_correct_answer: Підгалузь машинного навчання, що використовує багатошарові
+    нейронні мережі.
+  :question_answers:
+    A: Підгалузь машинного навчання, що використовує багатошарові нейронні мережі.
+    B: Метод програмування на основі правил.
+    C: Техніка збору даних для статистичних досліджень.
+- :question_body: Для чого використовуються нейронні мережі?
+  :question_correct_answer: Для розпізнавання образів, обробки мови та прийняття рішень.
+  :question_answers:
+    A: Для ручного введення інформації користувачем.
+    B: Для збереження даних у базах даних.
+    C: Для розпізнавання образів, обробки мови та прийняття рішень.
+- :question_body: Що таке перенавчання (overfitting) в машинному навчанні?
+  :question_correct_answer: Коли модель надто добре підлаштовується під навчальні
+    дані, втрачаючи здатність узагальнювати.
+  :question_answers:
+    A: Коли модель зовсім не навчається на даних.
+    B: Коли модель надто добре підлаштовується під навчальні дані, втрачаючи здатність
+      узагальнювати.
+    C: Коли модель працює тільки на тестових даних.
+- :question_body: Що таке навчання з підкріпленням?
+  :question_correct_answer: Метод машинного навчання, де агент навчається шляхом взаємодії
+    з середовищем і отримання винагороди або покарання.
+  :question_answers:
+    A: Тип глибокої нейронної мережі.
+    B: Метод машинного навчання, де агент навчається шляхом взаємодії з середовищем
+      і отримання винагороди або покарання.
+    C: Метод збору даних для тренування моделей.
