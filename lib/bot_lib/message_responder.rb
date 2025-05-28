@@ -3,12 +3,14 @@ class MessageResponder
   attr_reader :bot
   attr_reader :user
   attr_reader :engine_bot
+  attr_accessor :quiz_test
 
   def initialize(options)
     @bot = options[:bot]
     @message = options[:message]
     @engine_bot = options[:engine_bot]
     @user = User.find_or_create_by(uid: message.from.id)
+    @quiz_test = QuizTest.where(user: @user).order(created_at: :desc).first
     @logger = AppConfigurator.new.get_logger
     I18n.locale = @user.locale || :en
   end
@@ -17,9 +19,8 @@ class MessageResponder
     @logger.debug "received '#{message}' from #{message.chat.username}"
     
     if message.text == '/start'
-    
       answer_with_greeting_message
-    
+      @quiz_test = QuizTest.create(user: @user)
     elsif message.text.start_with?('/lang')
     #   puts 22222222222222222222222222222222222222222222
       begin
@@ -32,7 +33,7 @@ class MessageResponder
     elsif message.text.start_with?('/start_quiz')
     #   puts 23429493024903204902904903294023049023940023490290
       start_quiz_for_user
-
+      @quiz_test.update(status: 1) # in_progres
     elsif message.text == '/stop'
     #   puts 333333333333333333333333333333333333333333333333
       clear_user_state
@@ -83,11 +84,19 @@ class MessageResponder
         progress = engine_bot.user_progress[uid][:progress]
         unanswered = progress.select { |_, v| v.nil? }.keys
         if !unanswered.any?
-          results = engine_bot.user_engines[uid].statistics.print_report
+          statistics = engine_bot.user_engines[uid].statistics
+          results = statistics.print_report
           puts engine_bot.user_progress[user.uid]
           answer_clear_buttons(I18n.t('quiz_end', res: results))
           engine_bot.user_engines.delete(uid)
           engine_bot.user_progress.delete(uid)
+
+          @quiz_test.update(
+            correct_answers: statistics.correct_answers,
+            incorrect_answers: statistics.incorrect_answers,
+            percent: statistics.percent,
+            status: 2 # finish
+          )
           return
         end
 
@@ -103,10 +112,18 @@ class MessageResponder
               I18n.t('unanswered_questions', numbers: unanswered.map { |key| key + 1 }.join(', '))
             )
           else
-            results = engine_bot.user_engines[uid].statistics.print_report
+            statistics = engine_bot.user_engines[uid].statistics
+            results = statistics.print_report
             answer_clear_buttons(I18n.t('quiz_end', res: results))
             engine_bot.user_engines.delete(uid)
             engine_bot.user_progress.delete(uid)
+
+            @quiz_test.update(
+              correct_answers: statistics.correct_answers,
+              incorrect_answers: statistics.incorrect_answers,
+              percent: statistics.percent,
+              status: 2 # finish
+            )
           end
         end
     else
@@ -137,9 +154,9 @@ class MessageResponder
     engine_bot.user_engines[user.uid] = QuizProtsenkoVakariuk::Engine.new(user.uid)
     total_questions = engine_bot.user_engines[user.uid].question_collection.collection[I18n.locale.to_s].size
     engine_bot.user_progress[user.uid] = {
-        progress: (0...total_questions).to_h { |i| [i, nil] },
-        current_index: 0
-      }
+      progress: (0...total_questions).to_h { |i| [i, nil] },
+      current_index: 0
+    }
     send_question(0)
   end
 
@@ -181,5 +198,6 @@ class MessageResponder
     answers = question[:options]
     
     MessageSender.new(bot: bot, chat: message.chat, text: text, answers: answers).send
+    @quiz_test.update(current_question: index)
   end
 end

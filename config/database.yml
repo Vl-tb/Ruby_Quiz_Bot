@@ -1,10 +1,19 @@
-adapter: postgresql
-database: telegrambot_quiz
-encoding: unicode
-pool: 5
-timeout: 5000
-host: localhost
-port: 5432
-username : postgres
-password : postgres
+active: postgresql
+# active: sqlite
 
+postgresql:
+  adapter: postgresql
+  database: telegrambot_quiz
+  encoding: unicode
+  pool: 5
+  timeout: 5000
+  host: localhost
+  port: 5432
+  username: postgres
+  password: postgres
+
+sqlite:
+  adapter: sqlite3
+  database: db/tg_quiz_bot.sqlite3
+  pool: 5
+  timeout: 5000

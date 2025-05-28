@@ -1,5 +1,8 @@
 module QuizProtsenkoVakariuk
     class Statistics
+      attr_reader :correct_answers
+      attr_reader :incorrect_answers
+
       def initialize(writer)
         @correct_answers = 0
         @incorrect_answers = 0
@@ -23,10 +26,16 @@ module QuizProtsenkoVakariuk
         @correct_answers -= 1
         @incorrect_answers += 1
       end
+
+      def total
+        return @correct_answers + @incorrect_answers
+      end
+
+      def percent
+        return total.zero? ? 0 : (@correct_answers.to_f / total * 100).round(2)
+      end
       
       def print_report
-        total = @correct_answers + @incorrect_answers
-        percent = total.zero? ? 0 : (@correct_answers.to_f / total * 100).round(2)
         # report = "Correct: #{@correct_answers}, Incorrect: #{@incorrect_answers}, Success Rate: #{percent}%"
         report = I18n.t(
           :report_message,

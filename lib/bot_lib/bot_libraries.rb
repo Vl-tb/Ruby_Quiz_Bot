@@ -5,6 +5,8 @@ require 'telegram/bot'
 
 require_relative '../../models/user'
 require_relative '../../db/migrate/001_create_users.rb'
+require_relative '../../models/quiz_test.rb'
+require_relative '../../db/migrate/002_create_quiz_tests.rb'
 require_relative 'app_configurator'
 require_relative 'database_connector'
 require_relative 'engine_bot'

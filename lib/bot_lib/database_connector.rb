@@ -3,9 +3,13 @@ class DatabaseConnector
     def establish_connection
       ActiveRecord::Base.logger = Logger.new(active_record_logger_path)
 
-      configuration = YAML::load(IO.read(database_config_path))
-
-      ActiveRecord::Base.establish_connection(configuration)
+      config = YAML::load(IO.read(database_config_path))
+      if config.fetch('active') == "sqlite"
+        config = config.fetch('sqlite')
+      else
+        config = config.fetch('postgresql')
+      end
+      ActiveRecord::Base.establish_connection(config)
     end
 
     private

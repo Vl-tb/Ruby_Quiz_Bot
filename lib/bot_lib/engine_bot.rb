@@ -3,7 +3,6 @@ module QuizBot
     attr_accessor :user_engines, :user_progress
 
     def initialize(token: nil, logger: nil)
-
         @token = token || AppConfigurator.new.get_token
         @logger = logger || AppConfigurator.new.get_logger
 
